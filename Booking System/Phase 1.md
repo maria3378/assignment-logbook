@@ -1,26 +1,26 @@
-Penetration Testing Report - Booking System Phase 1
+Penetration Testing Report – Booking System Phase 1
 Author: Maria
 Date: 20/2/2025
-**Tested System: Booking System - Phase 1**
-Target URL: http://localhost:8000/register
+Target Application: Booking System - Phase 1
 Testing Environment: Kali Linux, Docker, OWASP ZAP, Burp Suite
+Application URL: http://localhost:8000/register
 
-1. **Introduction**
-This penetration testing report aims to evaluate the security of the Booking System - Phase 1 by assessing vulnerabilities in its authentication system and overall security posture.
+**1. Summary**
+This report documents the penetration testing process for the Booking System - Phase 1. However, the application was not accessible due to technical issues. Below are the findings and recommendations.
 
-2. **Environment Setup**
+**2. Testing Setup**
 2.1 Tools Used
-Kali Linux (Penetration testing OS)
-Docker (To run the application)
-OWASP ZAP & Burp Suite (For security testing)
-2.2 Setup Process
-Cloned the project repository:
+Kali Linux – Main testing OS
+Docker – To run the application
+OWASP ZAP & Burp Suite – For vulnerability assessment
+2.2 Steps Taken
+Cloned the project:
 bash
 Copy
 Edit
 git clone https://github.com/vheikkiniemi/animated-waddle.git
 cd animated-waddle/Booking\ system/Phase\ 1/Ver1
-Attempted to start the application using Docker:
+Tried to start the application:
 bash
 Copy
 Edit
@@ -30,56 +30,33 @@ bash
 Copy
 Edit
 docker ps
-Attempted to access http://localhost:8000/register in a browser.
+Attempted to access: http://localhost:8000/register
 3. **Issues Encountered**
-Despite setting up the system, the application was not accessible at localhost:8000/register. Below are the errors encountered:
-
-3.1 Connection Error
-Browser displayed: "Unable to connect"
-Ran docker ps and found that the web container was not running.
-Checked logs using:
+   
+Issue	Description	Status
+Application not accessible    |	http://localhost:8000/register returned "Unable to Connect." |	 Not Resolved
+Docker service issues	docker-compose was not recognized as a valid command.         |	  Fixed (Installed Docker Compose)
+Port 8000 not listening	No service running on port 8000.	 Not Resolved
+Troubleshooting Steps Attempted
+Checked container logs:
 bash
 Copy
 Edit
 docker-compose logs
-Found errors related to database connection failure / missing dependencies.
-3.2 Docker Issues
-Running docker-compose returned an error:
-bash
-Copy
-Edit
-docker-compose: command not found
-Solution attempted: Installed Docker Compose with:
-bash
-Copy
-Edit
-sudo apt install docker-compose
-Retried but still unable to connect.
-3.3 Port Issues
-Checked if port 8000 was in use:
+Verified open ports:
 bash
 Copy
 Edit
 ss -tulnp | grep 8000
-No service was running on port 8000.
-Tried using container's IP instead of localhost but still not accessible.
-4. **Security Testing Plan**
-Since I was unable to fully access the system, I outline the expected vulnerabilities and test scenarios that should be performed if the application was running.
+Restarted Docker and tried alternative access methods (container IP).
+Despite these efforts, the issue remains unresolved.
 
-4.1 Potential Vulnerabilities in Registration Page
-ID	Vulnerability	Description	Risk Level	Testing Method
-V1	SQL Injection	Check if malicious SQL queries can bypass authentication.	High	Use ' OR 1=1 -- in input fields.
-V2	Cross-Site Scripting (XSS)	Inject <script>alert('XSS')</script> to test if JavaScript runs.	Medium	Input malicious scripts into form fields.
-V3	Broken Authentication	Attempt to bypass login with default credentials.	High	Test with admin:admin or other weak passwords.
-V4	Sensitive Data Exposure	Check if passwords are stored in plaintext.	High	Inspect responses for exposed credentials.
-5. **Recommendations**
-Even though the application was inaccessible, here are general recommendations for securing web applications:
+4. **Expected Security Tests (If Accessible)**
+Vulnerability	Description	Risk Level	Testing Method
+SQL Injection	Bypass login using malicious SQL queries.	High	' OR 1=1 -- in input fields.
+Cross-Site Scripting (XSS)	Inject JavaScript to exploit input validation.	Medium	<script>alert('XSS')</script> in form fields.
+Broken Authentication	Test weak/default credentials.	High	Try admin:admin, password123.
+Data Exposure	Check for plaintext password storage.	High	Inspect responses for sensitive data.
 
-Fix Docker Issues: Ensure that all containers start correctly and dependencies are installed.
-Secure Authentication: Implement strong password policies and two-factor authentication.
-Sanitize User Input: Use parameterized queries to prevent SQL injection.
-Enable HTTPS: Encrypt communications using TLS.
-Use Security Headers: Implement CSP, X-Frame-Options, and other headers.
-6. **Conclusion**
-Due to technical issues, I was unable to conduct a full penetration test on the Booking System. However, I identified key areas that should be tested for vulnerabilities. If the system is fixed and accessible, a detailed security assessment should be conducted using OWASP ZAP and Burp Suite.
-
+**5. Conclusion**
+Due to technical issues, I was unable to conduct full penetration testing on the Booking System. If the system is fixed and accessible, further security testing should be performed.
