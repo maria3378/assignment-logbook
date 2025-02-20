@@ -9,6 +9,7 @@ Application URL: http://localhost:8000/register
 This report documents the penetration testing process for the Booking System - Phase 1. However, the application was not accessible due to technical issues. Below are the findings and recommendations.
 
 **2. Testing Setup**
+
 2.1 Tools Used
 Kali Linux – Main testing OS
 Docker – To run the application
@@ -31,6 +32,7 @@ Copy
 Edit
 docker ps
 Attempted to access: http://localhost:8000/register
+
 3. **Issues Encountered**
    
 Issue	Description	Status
@@ -52,6 +54,7 @@ Restarted Docker and tried alternative access methods (container IP).
 Despite these efforts, the issue remains unresolved.
 
 4. **Expected Security Tests (If Accessible)**
+   
 Vulnerability	Description	Risk Level	Testing Method
 SQL Injection	Bypass login using malicious SQL queries.	High	' OR 1=1 -- in input fields.
 Cross-Site Scripting (XSS)	Inject JavaScript to exploit input validation.	Medium	<script>alert('XSS')</script> in form fields.
