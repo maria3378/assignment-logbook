@@ -8,3 +8,12 @@
 | 01.11.2024 | 3          | Design discussion   | Wireframes draft  |
 | 02.11.2024 | 4          | Coding: Login page  | Functional login  |
 
+
+
+# Logbook - Booking System Phase 1
+
+## 1. Initial Setup
+- Cloned the repository:
+  ```bash
+  git clone https://github.com/vheikkiniemi/animated-waddle.git
+  cd animated-waddle/Booking\ system/Phase\ 1/Ver2
