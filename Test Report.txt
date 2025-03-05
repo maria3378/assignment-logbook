@@ -1,0 +1,121 @@
+
+# Penetration Testing Report - Booking System Phase 1
+
+## 1. Introduction
+### Purpose
+This report documents the penetration testing process for the Booking System application (Phase 1). The goal was to identify vulnerabilities, test the system's functionality, and ensure compliance with GDPR and Privacy by Design (PbD) principles.
+
+### Scope
+The testing focused on:
+- Setting up the application using Docker.
+- Testing user registration, login, and resource booking functionality.
+- Identifying and categorizing security vulnerabilities.
+- Verifying fixes for previously identified issues.
+
+### Methods Used
+- **Gray-box testing**: Partial knowledge of the system was used to simulate an attacker with some insider information.
+- **Tools**: Docker, Checkmarx, OWASP ZAP, and manual testing.
+- **Environment**: The application was set up locally using Docker containers.
+
+---
+
+## 2. Summary
+### Key Findings (Initial Test)
+1. **User Registration Failure**: Errors occurred during user registration, preventing new users from being created.
+2. **Successful Login**: Existing users were able to log in without issues.
+3. **SQL Injection Vulnerability**: Found in the login form.
+4. **Weak Session Tokens**: Session tokens were predictable and insufficiently complex.
+
+### Key Findings (After Fixes)
+1. **User Registration Fixed**: The issue preventing user registration was resolved.
+2. **SQL Injection Fixed**: Input validation and parameterized queries were implemented.
+3. **Session Tokens Strengthened**: Cryptographically secure tokens are now used.
+
+### Recommendations
+1. **Regular Security Audits**: Conduct periodic security audits to identify and fix vulnerabilities.
+2. **GDPR Compliance**: Ensure all personal data is encrypted and user rights are respected.
+3. **Third-Party Library Updates**: Keep all third-party libraries up to date to avoid future vulnerabilities.
+
+---
+
+## 3. Findings and Categorization
+### Initial Test
+#### Critical (Red)
+- **SQL Injection in Login Form**:
+  - **Description**: The login form was vulnerable to SQL injection, allowing attackers to bypass authentication.
+  - **Recommendation**: Implement parameterized queries and input validation.
+
+#### Medium (Yellow)
+- **Weak Session Tokens**:
+  - **Description**: Session tokens were predictable and could be brute-forced.
+  - **Recommendation**: Use cryptographically secure random number generators for session tokens.
+
+- **User Registration Failure**:
+  - **Description**: The system failed to register new users, returning errors during the registration process.
+  - **Recommendation**: Investigate the database connection and registration logic to identify and fix the issue.
+
+#### Low (Green)
+- **Outdated Libraries**:
+  - **Description**: Some third-party libraries were outdated but not currently vulnerable.
+  - **Recommendation**: Update all third-party libraries to their latest versions.
+
+### After Fixes
+- **SQL Injection Fixed**: The login form is no longer vulnerable to SQL injection.
+- **Session Tokens Strengthened**: Session tokens are now cryptographically secure.
+- **User Registration Working**: Users can now register without errors.
+
+---
+
+## 4. Appendices
+### Screenshots
+- **Initial Setup**: ![Initial Setup](screenshots/initial_setup.png)
+- **After Fixes**: ![After Fixes](screenshots/after_fixes.png)
+
+### Security Reports
+- **Initial Checkmarx Report**: [Checkmarx_Report_Initial.pdf](reports/Checkmarx_Report_Initial.pdf)
+- **Initial OWASP ZAP Report**: [OWASP_ZAP_Report_Initial.pdf](reports/OWASP_ZAP_Report_Initial.pdf)
+- **Updated Checkmarx Report**: [Checkmarx_Report_Updated.pdf](reports/Checkmarx_Report_Updated.pdf)
+- **Updated OWASP ZAP Report**: [OWASP_ZAP_Report_Updated.pdf](reports/OWASP_ZAP_Report_Updated.pdf)
+
+---
+
+## 5. Logbook
+### Steps Taken
+1. **Initial Setup**:
+   - Cloned the repository and set up the application using Docker.
+   - Verified the database and web interface were running correctly.
+2. **Initial Testing**:
+   - Identified SQL injection and weak session tokens.
+   - Discovered that user registration was failing, but existing users could log in successfully.
+3. **Fixes Implemented**:
+   - Fixed SQL injection by implementing parameterized queries.
+   - Strengthened session tokens using cryptographically secure methods.
+   - Resolved the user registration issue by fixing the database connection and registration logic.
+4. **Updated Testing**:
+   - Verified that all fixes were successful.
+   - Generated updated security reports using Checkmarx and OWASP ZAP.
+
+### Issues Encountered
+1. **User Registration Failure**:
+   - **Description**: The system failed to register new users, returning errors during the registration process.
+   - **Resolution**: Investigated the database connection and registration logic, and fixed the issue.
+2. **Database Connection Error**:
+   - **Description**: The web interface initially failed to connect to the database.
+   - **Resolution**: Verified the database connection string and restarted the containers.
+
+---
+
+## 6. Submission
+### Git Repository Link
+[Link to the Repository](https://github.com/vheikkiniemi/animated-waddle/tree/main/Booking%20system/Phase%201)
+
+### Files Included
+- `Test_Report.md`
+- `Checkmarx_Report_Initial.pdf`
+- `OWASP_ZAP_Report_Initial.pdf`
+- `Checkmarx_Report_Updated.pdf`
+- `OWASP_ZAP_Report_Updated.pdf`
+- `Logbook.md`
+- Screenshots and logs.
+
+---
