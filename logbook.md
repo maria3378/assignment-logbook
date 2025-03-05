@@ -17,3 +17,13 @@
   ```bash
   git clone https://github.com/vheikkiniemi/animated-waddle.git
   cd animated-waddle/Booking\ system/Phase\ 1/Ver2
+
+
+## 2. Built and ran the database:
+
+
+docker compose -f 'docker-compose.yml' up -d --build 'database'
+Built and ran the web interface:
+
+
+docker compose -f 'docker-compose.yml' up -d --build 'web'
