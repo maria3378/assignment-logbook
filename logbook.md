@@ -158,3 +158,47 @@ Low Risk
 - Password cracking results have been documented  
 - Security risks and recommended improvements have been noted for the next phase  
 - Awaiting feedback and further instructions  
+
+
+
+# Booking System – Phase 2 Logbook
+
+## Assignment Overview
+In this phase, I performed **penetration testing** against the Booking System login page by conducting both dictionary and non-dictionary (brute-force) attacks using **Burp Suite** and **Hydra**.
+
+The purpose was to simulate how an attacker could gain access to user accounts by exploiting weak or reused passwords through the web interface.
+
+---
+
+##  Tools Used
+- **Burp Suite** (Community Edition)
+- **Hydra**
+- **Deno** (to run the Booking System web app)
+- **Browser (Chrome)** for manual testing
+
+---
+
+## Test Environment
+- **Target app**: Booking System (served at `http://localhost:8000`)
+- **Login route**: `POST /login`
+- **Form fields**: `email`, `password`
+- **Error message on login failure**: `"Invalid credentials"`
+
+---
+
+## Dictionary Attack – Burp Suite
+
+- **User**: `whatsupdoc@looneytunes.tv`
+- **Wordlist**: `rockyou.txt`
+- **Result**: Password found — `carrots123`
+- **Time Taken**: ~2 minutes
+- **Success Detection**: Response had different length, HTTP 200 OK
+
+---
+
+## Dictionary Attack – Hydra
+
+- **Command Used**:
+  ```bash
+  hydra -l whatsupdoc@looneytunes.tv -P /usr/share/wordlists/rockyou.txt 127.0.0.1 http-post-form "/login:email=^USER^&password=^PASS^:Invalid credentials"
+
